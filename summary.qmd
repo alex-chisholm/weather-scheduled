@@ -1,0 +1,41 @@
+---
+title: "Weather in Amsterdam"
+format: 
+  html:
+    echo: false
+execute:
+  warning: false
+  message: false
+---
+```{r}
+
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(stringr)
+
+df <- read_csv("weather.csv")
+
+```
+
+### Current Conditions: `r str_to_title(df$description)`
+
+It is currently `r df$temp_c_current` degrees celsius in `r df$city` (`r df$country`) with wind speeds up to `r df$wind_speed` kilometers an hour.
+
+```{r}
+
+ggplot(df, aes(x = city)) +
+  geom_linerange(aes(ymin = temp_c_min, ymax = temp_c_max), size = 4, color = "#447099") +
+  geom_point(aes(y = temp_c_current), size = 10, color = "#EE6331") +
+  coord_flip() +
+  labs(title = "Today's Temperature Range (Celsius)", y = NULL, x = NULL) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+
+```
+
+<small>Last update: `r df$date`</small>

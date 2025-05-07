@@ -1,0 +1,2 @@
+city,country,date,temp_c_current,temp_c_min,temp_c_max,pressure,humidity,wind_speed,description
+Amsterdam,NL,2025-05-07 16:09:59 EDT,9.96,9.36,11.11,1020,68,4.12,clear sky
